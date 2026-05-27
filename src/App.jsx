@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -91,7 +90,7 @@ const pageData = {
     faqs: ["What should I pack?", "Can siblings stay together?", "Can I add grooming before pickup?"],
   },
   "Cat Boarding": {
-    title: "Cat Burchell Boarding",
+    title: "Cat Boarding",
     eyebrow: "Service",
     icon: Cat,
     photo: animalPhotos.cat,
@@ -489,8 +488,49 @@ function ServiceGrid({ style = "cards", setPage }) {
   );
 }
 
+function getFaqAnswer(question, pageTitle) {
+  const lower = question.toLowerCase();
+
+  if (lower.includes("webcam") || lower.includes("cameras")) {
+    return "Returning clients can use webcam access to check in on available areas during the day. Camera availability can vary by location, room, schedule, and privacy rules.";
+  }
+  if (lower.includes("vaccine") || lower.includes("records") || lower.includes("requirements")) {
+    return "Vaccination and care requirements should be submitted before a first visit. Park9 should confirm the current list for dogs and cats during booking.";
+  }
+  if (lower.includes("grooming") || lower.includes("groomed")) {
+    return "Grooming can be positioned as an add-on to daycare or boarding when available. Final timing and pricing should be confirmed when booking.";
+  }
+  if (lower.includes("pack") || lower.includes("bring")) {
+    return "Bring food, medication, written care notes, and anything Park9 requests for your pet’s stay. Keep instructions clear and labelled.";
+  }
+  if (lower.includes("siblings")) {
+    return "Pets from the same household may be able to stay together depending on service type, space, temperament, and safety considerations.";
+  }
+  if (lower.includes("separate from dogs") || lower.includes("cats kept")) {
+    return "Cat boarding should be presented as a calm, separate experience with quiet handling and clear routines, not as an afterthought to dog services.";
+  }
+  if (lower.includes("areas") || lower.includes("shuttle")) {
+    return "Shuttle availability should be confirmed by location, timing, and service type. The final site should include the exact service area once Park9 confirms it.";
+  }
+  if (lower.includes("pricing") || lower.includes("fees") || lower.includes("packages") || lower.includes("vary")) {
+    return "Pricing can vary by service, package, location, pet needs, coat condition, and add-ons. The pricing page should give clear starting points and direct clients to confirm final rates.";
+  }
+  if (lower.includes("parking") || lower.includes("close") || lower.includes("location")) {
+    return "Location pages should include address, parking or drop-off details, hours, and the best services for each Park9 location.";
+  }
+  if (lower.includes("start") || lower.includes("book")) {
+    return "New clients should start by choosing a service, creating a pet profile, submitting requirements, and booking a Meet & Greet or first visit.";
+  }
+  if (lower.includes("medication")) {
+    return "Medication instructions should be submitted clearly before the visit, including dosage, timing, storage, and any special handling notes.";
+  }
+
+  return `${pageTitle} questions should be answered with clear booking guidance, current requirements, and a direct path to contact Park9 for anything specific to the pet.`;
+}
+
 function PageView({ page, setPage, activeConcept }) {
   const Icon = page.icon;
+  const [openFaq, setOpenFaq] = useState(null);
   const relatedServices = services.filter((item) => item.id !== page.id).slice(0, 5);
 
   return (
@@ -555,13 +595,28 @@ function PageView({ page, setPage, activeConcept }) {
         <section className="max-w-7xl mx-auto px-5 py-16 grid lg:grid-cols-[0.85fr_1.15fr] gap-8">
           <div className="rounded-[2.5rem] bg-[#173d39] text-white p-8 lg:p-10">
             <h2 className="text-4xl font-black mb-3">Common questions</h2>
-            <p className="text-white/70 font-semibold mb-8">Find quick answers before booking.</p>
+            <p className="text-white/70 font-semibold mb-8">Tap a question for a quick answer, or contact Park9 for details specific to your pet.</p>
             <PrimaryButton light onClick={() => setPage("Contact")}>Ask Park9</PrimaryButton>
           </div>
           <div className="grid md:grid-cols-3 gap-4">
-            {page.faqs.map((faq) => (
-              <div key={faq} className="rounded-2xl bg-white border border-black/10 p-5 font-black shadow-sm">{faq}</div>
-            ))}
+            {page.faqs.map((faq) => {
+              const isOpen = openFaq === faq;
+              return (
+                <button
+                  key={faq}
+                  type="button"
+                  onClick={() => setOpenFaq(isOpen ? null : faq)}
+                  className="text-left rounded-2xl bg-white border border-black/10 p-5 shadow-sm hover:-translate-y-1 transition"
+                >
+                  <div className="font-black text-lg leading-tight mb-3">{faq}</div>
+                  {isOpen ? (
+                    <p className="text-sm font-semibold text-[#526762] leading-relaxed">{getFaqAnswer(faq, page.title)}</p>
+                  ) : (
+                    <p className="text-sm font-black text-[#b8861b]">Tap for answer</p>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </section>
 
