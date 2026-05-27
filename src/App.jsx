@@ -27,6 +27,8 @@ const animalPhotos = {
   dogPortrait: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1200&q=80",
   dogPool: "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=1200&q=80",
   smallDog: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80",
+  torontoSkyline: "https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=1400&q=80",
+  pearsonAirport: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80",
 };
 
 const concepts = [
@@ -57,6 +59,13 @@ const concepts = [
     headline: "Closest to the current Park9 identity",
     description: "A safer brand evolution that modernizes Park9 without making it feel like a totally different company.",
     bestFor: "Brand continuity + cleaner UX",
+  },
+  {
+    id: "simple",
+    label: "5. Simple Clean",
+    headline: "Less copy, clearer action",
+    description: "A lighter, cleaner option: fewer sections, bigger actions, simple service blocks, visible booking, locations, reviews, and client login.",
+    bestFor: "Fast decisions + simple client review",
   },
 ];
 
@@ -163,7 +172,7 @@ const pageData = {
     title: "Pearson YYZ Location",
     eyebrow: "Location",
     icon: Plane,
-    photo: animalPhotos.dogPortrait,
+    photo: animalPhotos.pearsonAirport,
     summary: "Airport-adjacent pet care for boarding, grooming, travel-day drop-off, and easy check-in near Pearson YYZ.",
     hero: "Built for travel days and longer stays.",
     sections: [
@@ -177,7 +186,7 @@ const pageData = {
     title: "Downtown Toronto Location",
     eyebrow: "Location",
     icon: MapPin,
-    photo: animalPhotos.smallDog,
+    photo: animalPhotos.torontoSkyline,
     summary: "Convenient downtown pet care for daycare, grooming, recurring bookings, and busy Toronto pet parents.",
     hero: "City pet care for real Toronto routines.",
     sections: [
@@ -286,19 +295,19 @@ const allPageGroups = [
 ];
 
 const testimonials = [
-  ["It is so important to know that our dogs are well cared for when we are away. Our dogs come back happy and healthy. Thank you Park9!!", "Stef"],
-  ["Absolutely amazing place. It's the only place I would trust our 4 legged family member to.", "Albert"],
-  ["The webcams made all the difference. I could check in and see that my dog was relaxed and having fun.", "Maya"],
-  ["Our cat is usually nervous anywhere new, but the Park9 team made the whole stay feel calm and carefully managed.", "Daniel"],
-  ["Drop-off before our flight was so easy. Park9 took one stressful part of travel completely off our plate.", "Priya"],
-  ["The staff know our dog by name and understand his quirks. That kind of care is why we keep coming back.", "Rob"],
-  ["The grooming team did a beautiful job and actually listened to what we wanted.", "Chris"],
-  ["The pool rental is genius. Our high-energy dog slept like a rock afterward.", "Samantha"],
-  ["The new-client process was clear from start to finish. We knew exactly what to bring and expect.", "Leah"],
+  ["It is so important to know that our dogs are well cared for when we are away. Our dogs come back happy and healthy. Thank you Park9!!", "Riley"],
+  ["Absolutely amazing place. It's the only place I would trust our 4 legged family member to.", "Juliette"],
+  ["The webcams made all the difference. I could check in and see that my dog was relaxed and having fun.", "Jeff"],
+  ["Our cat is usually nervous anywhere new, but the Park9 team made the whole stay feel calm and carefully managed.", "Sarah"],
+  ["Drop-off before our flight was so easy. Park9 took one stressful part of travel completely off our plate.", "Dr. Moss"],
+  ["The staff know our dog by name and understand his quirks. That kind of care is why we keep coming back.", "Dane"],
+  ["The grooming team did a beautiful job and actually listened to what we wanted.", "Taylor"],
+  ["The pool rental is genius. Our high-energy dog slept like a rock afterward.", "Morgan"],
+  ["The new-client process was clear from start to finish. We knew exactly what to bring and expect.", "Avery"],
 ];
 
 function runChecks() {
-  console.assert(concepts.length === 4, "Expected four design options.");
+  console.assert(concepts.length === 5, "Expected five design options.");
   console.assert(services.length === 6, "Expected six core services.");
   console.assert(allPageGroups.flatMap((group) => group[1]).length === pages.length, "Every page should appear in the page directory.");
   console.assert(testimonials.length === 9 && testimonials.length % 3 === 0, "Testimonials should rotate in groups of three.");
@@ -422,7 +431,7 @@ function DesignSelector({ setActive, setPage }) {
           <Logo variant="original" />
           <div className="hidden md:flex items-center gap-2 text-sm font-black text-[#516966]">
             <span className="rounded-full bg-[#f0c95a] px-4 py-2">Client Review</span>
-            <span className="rounded-full bg-[#edf5f1] px-4 py-2">4 complete directions</span>
+            <span className="rounded-full bg-[#edf5f1] px-4 py-2">5 complete directions</span>
           </div>
         </div>
       </header>
@@ -453,7 +462,7 @@ function DesignSelector({ setActive, setPage }) {
         </section>
 
         <section className="max-w-7xl mx-auto px-5 pb-20">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-5">
             {concepts.map((concept) => (
               <button type="button" key={concept.id} onClick={() => choose(concept.id)} className="text-left rounded-[2rem] bg-white border border-black/10 p-6 shadow-sm hover:-translate-y-1 hover:shadow-xl transition">
                 <p className="text-sm uppercase tracking-[.2em] text-[#b8861b] font-black mb-4">{concept.label}</p>
@@ -723,7 +732,150 @@ function Playful({ setPage }) {
 }
 
 function Urban({ setPage }) {
-  return <div id="top" className="bg-[#f3efe4] text-[#183b36] pb-24"><Header setPage={setPage} logoVariant="urban" theme="dark" /><section className="max-w-7xl mx-auto px-5 py-14"><div className="rounded-[3rem] bg-[#dcefe8] border border-[#bad4ca] p-8 lg:p-12 grid lg:grid-cols-[1fr_.95fr] gap-10 items-center"><div><p className="uppercase tracking-[.24em] text-[#b8861b] font-black mb-5">Toronto pet care, without the chaos</p><h1 className="text-5xl lg:text-7xl font-black tracking-[-.06em] leading-[.9] mb-7">A friendly city hub for busy pet parents.</h1><p className="text-xl text-[#46615b] font-semibold leading-relaxed mb-8">Urban practicality with warmer, neighbourly Toronto energy: YYZ travel days, downtown routines, webcams, and fast booking for real life.</p><div className="flex flex-wrap gap-3"><PrimaryButton onClick={() => setPage("New Clients")}>Start as a new client</PrimaryButton><button type="button" onClick={() => setPage("Downtown Toronto")} className="rounded-full bg-white border border-[#bad4ca] px-7 py-4 font-black">Downtown location</button><button type="button" onClick={() => setPage("Pearson YYZ")} className="rounded-full bg-[#f0c95a] px-7 py-4 font-black">YYZ location</button></div></div><div className="grid grid-cols-2 gap-4"><img src={animalPhotos.dogRun} alt="Dogs in care" className="rounded-[2rem] h-72 w-full object-cover col-span-2" /><button type="button" onClick={() => setPage("Webcams")} className="rounded-[1.5rem] bg-white p-6 text-left border border-[#bad4ca]"><Camera className="mb-6 text-[#b8861b]" /><h3 className="text-2xl font-black">Live webcams</h3></button><button type="button" onClick={() => setPage("Client Login")} className="rounded-[1.5rem] bg-[#183b36] text-white p-6 text-left"><Home className="mb-6" /><h3 className="text-2xl font-black">Client login</h3></button></div></div></section><section id="services" className="max-w-7xl mx-auto px-5 py-16"><div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"><h2 className="text-5xl font-black tracking-[-.05em]">Built for Toronto pet routines.</h2><p className="font-semibold text-[#516966] max-w-md">Organized, friendly, and practical for city pet parents.</p></div><ServiceGrid style="urban" setPage={setPage} /></section><PageHub setPage={setPage} /><StandardSections variant="urban" setPage={setPage} /></div>;
+  return <div id="top" className="bg-[#f3efe4] text-[#183b36] pb-24"><Header setPage={setPage} logoVariant="urban" theme="dark" /><section className="max-w-7xl mx-auto px-5 py-14"><div className="rounded-[3rem] bg-[#dcefe8] border border-[#bad4ca] p-8 lg:p-12 grid lg:grid-cols-[1fr_.95fr] gap-10 items-center"><div><p className="uppercase tracking-[.24em] text-[#b8861b] font-black mb-5">Toronto pet care, without the chaos</p><h1 className="text-5xl lg:text-7xl font-black tracking-[-.06em] leading-[.9] mb-7">A friendly city hub for busy pet parents.</h1><p className="text-xl text-[#46615b] font-semibold leading-relaxed mb-8">Urban practicality with warmer, neighbourly Toronto energy: YYZ travel days, downtown routines, webcams, and fast booking for real life.</p><div className="flex flex-wrap gap-3"><PrimaryButton onClick={() => setPage("New Clients")}>Start as a new client</PrimaryButton><button type="button" onClick={() => setPage("Downtown Toronto")} className="rounded-full bg-white border border-[#bad4ca] px-7 py-4 font-black">Downtown location</button><button type="button" onClick={() => setPage("Pearson YYZ")} className="rounded-full bg-[#f0c95a] px-7 py-4 font-black">YYZ location</button></div></div><div className="grid grid-cols-2 gap-4">
+          <button type="button" onClick={() => setPage("Downtown Toronto")} className="relative rounded-[2rem] overflow-hidden h-72 col-span-2 text-left">
+            <img src={animalPhotos.torontoSkyline} alt="Toronto skyline with CN Tower" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/5" />
+            <div className="absolute bottom-5 left-5 right-5 text-white">
+              <p className="uppercase tracking-[.18em] text-white/80 font-black text-sm mb-1">Downtown Toronto</p>
+              <h3 className="text-3xl font-black">City care with local convenience.</h3>
+            </div>
+          </button>
+
+          <button type="button" onClick={() => setPage("Pearson YYZ")} className="relative rounded-[1.5rem] overflow-hidden text-left min-h-[180px]">
+            <img src={animalPhotos.pearsonAirport} alt="Pearson airport" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-black/45" />
+            <div className="relative z-10 p-6 text-white">
+              <Plane className="mb-6 text-[#f0c95a]" />
+              <h3 className="text-2xl font-black">Pearson YYZ</h3>
+            </div>
+          </button>
+
+          <button type="button" onClick={() => setPage("Client Login")} className="rounded-[1.5rem] bg-[#183b36] text-white p-6 text-left">
+            <Home className="mb-6" />
+            <h3 className="text-2xl font-black">Client login</h3>
+          </button>
+        </div></div></section><section id="services" className="max-w-7xl mx-auto px-5 py-16"><div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"><h2 className="text-5xl font-black tracking-[-.05em]">Built for Toronto pet routines.</h2><p className="font-semibold text-[#516966] max-w-md">Organized, friendly, and practical for city pet parents.</p></div><ServiceGrid style="urban" setPage={setPage} /></section><PageHub setPage={setPage} /><StandardSections variant="urban" setPage={setPage} /></div>;
+}
+
+function SimpleClean({ setPage }) {
+  const featuredServices = ["Dog Playcare", "Dog Boarding", "Grooming", "Shuttle"].map((id) => pageData[id]);
+
+  return (
+    <div id="top" className="bg-[#f8f6ef] text-[#173d39] pb-24">
+      <Header setPage={setPage} logoVariant="original" />
+
+      <section className="max-w-6xl mx-auto px-5 py-14 lg:py-20 text-center">
+        <p className="uppercase tracking-[.24em] text-[#b8861b] font-black mb-5">Simple Clean Direction</p>
+        <h1 className="text-5xl lg:text-7xl font-black tracking-[-.06em] leading-[.9] mb-6">Dog daycare, boarding, grooming, and pet care made simple.</h1>
+        <p className="text-xl text-[#526762] leading-relaxed max-w-3xl mx-auto mb-8">A cleaner Park9 direction with fewer sections, bigger actions, clear service cards, visible booking, locations, reviews, webcams, and client login.</p>
+        <div className="flex justify-center gap-3 flex-wrap">
+          <PrimaryButton onClick={() => setPage("New Clients")}>Book now</PrimaryButton>
+          <button type="button" onClick={() => setPage("Client Login")} className="rounded-full bg-white border border-[#d8e2df] px-7 py-4 font-black">Client Login</button>
+          <button type="button" onClick={() => setPage("Contact")} className="rounded-full bg-[#f0c95a] px-7 py-4 font-black">Contact</button>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-5 pb-12">
+        <div className="grid md:grid-cols-3 gap-4">
+          <button type="button" onClick={() => setPage("Contact")} className="rounded-3xl bg-white border border-black/10 p-6 text-center shadow-sm hover:-translate-y-1 transition"><Phone className="mx-auto mb-3 text-[#b8861b]" /><h3 className="font-black text-xl">Call or contact</h3><p className="font-semibold text-[#526762]">Fast answers for availability and care questions.</p></button>
+          <button type="button" onClick={() => setPage("Downtown Toronto")} className="rounded-3xl bg-white border border-black/10 p-6 text-center shadow-sm hover:-translate-y-1 transition"><MapPin className="mx-auto mb-3 text-[#b8861b]" /><h3 className="font-black text-xl">Two locations</h3><p className="font-semibold text-[#526762]">Pearson YYZ and Downtown Toronto.</p></button>
+          <button type="button" onClick={() => setPage("Webcams")} className="rounded-3xl bg-white border border-black/10 p-6 text-center shadow-sm hover:-translate-y-1 transition"><Camera className="mx-auto mb-3 text-[#b8861b]" /><h3 className="font-black text-xl">Webcam access</h3><p className="font-semibold text-[#526762]">Peace of mind for returning clients.</p></button>
+        </div>
+      </section>
+
+      <section id="services" className="max-w-6xl mx-auto px-5 py-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
+          <div>
+            <p className="uppercase tracking-[.22em] text-[#b8861b] font-black mb-3">Services</p>
+            <h2 className="text-4xl lg:text-5xl font-black tracking-[-.04em]">Choose what your pet needs.</h2>
+          </div>
+          <button type="button" onClick={() => setPage("Pricing")} className="rounded-full bg-white border border-black/10 px-5 py-3 font-black">View pricing</button>
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          {featuredServices.map((service) => {
+            const Icon = service.icon;
+            return (
+              <button type="button" key={service.title} onClick={() => setPage(service.title)} className="text-left rounded-[2rem] bg-white p-7 border border-black/10 shadow-sm hover:-translate-y-1 transition">
+                <Icon className="mb-5 text-[#b8861b]" size={34} />
+                <h3 className="text-3xl font-black mb-3">{service.title}</h3>
+                <p className="text-[#526762] font-semibold leading-relaxed mb-5">{service.summary}</p>
+                <span className="font-black inline-flex items-center gap-2">View service <ArrowRight size={16} /></span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="all-pages" className="max-w-6xl mx-auto px-5 py-10">
+        <div className="rounded-[2rem] bg-white border border-black/10 p-6 lg:p-8 shadow-sm">
+          <h2 className="text-3xl font-black mb-5">Quick links</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {["Dog Playcare", "Dog Boarding", "Cat Boarding", "Grooming", "Pool Rental", "Shuttle", "Webcams", "Requirements", "Pricing", "Contact", "New Clients", "Client Login"].map((item) => (
+              <button key={item} type="button" onClick={() => setPage(item)} className="rounded-full bg-[#f8f6ef] hover:bg-[#f0c95a] px-4 py-3 font-black text-sm transition">{item}</button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="locations" className="max-w-6xl mx-auto px-5 py-14">
+        <div className="mb-8">
+          <p className="uppercase tracking-[.22em] text-[#b8861b] font-black mb-3">Two locations</p>
+          <h2 className="text-4xl lg:text-5xl font-black tracking-[-.04em]">Easy care in Downtown Toronto and near Pearson YYZ.</h2>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-5">
+          <button
+            type="button"
+            onClick={() => setPage("Downtown Toronto")}
+            className="relative overflow-hidden text-left rounded-[2rem] min-h-[360px] shadow-sm hover:-translate-y-1 transition"
+          >
+            <img src={animalPhotos.torontoSkyline} alt="Downtown Toronto with CN Tower" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10" />
+            <div className="relative z-10 p-8 text-white flex h-full flex-col justify-end">
+              <MapPin className="mb-5 text-[#f0c95a]" />
+              <p className="uppercase tracking-[.18em] text-white/75 font-black mb-2">Downtown Toronto</p>
+              <h3 className="text-3xl font-black mb-3">City convenience for busy pet parents.</h3>
+              <p className="font-semibold text-white/90 max-w-md">Daycare, grooming, recurring visits, and easy access for Toronto routines.</p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setPage("Pearson YYZ")}
+            className="relative overflow-hidden text-left rounded-[2rem] min-h-[360px] shadow-sm hover:-translate-y-1 transition"
+          >
+            <img src={animalPhotos.pearsonAirport} alt="Pearson airport travel concept" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10" />
+            <div className="relative z-10 p-8 text-white flex h-full flex-col justify-end">
+              <Plane className="mb-5 text-[#f0c95a]" />
+              <p className="uppercase tracking-[.18em] text-white/75 font-black mb-2">Pearson YYZ</p>
+              <h3 className="text-3xl font-black mb-3">Perfect for travel days and longer stays.</h3>
+              <p className="font-semibold text-white/90 max-w-md">Convenient boarding, grooming before pickup, and airport-adjacent drop-off.</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section id="reviews" className="max-w-6xl mx-auto px-5 py-14">
+        <h2 className="text-4xl font-black mb-8">What pet parents say</h2>
+        <Testimonials />
+      </section>
+
+      <section className="max-w-6xl mx-auto px-5 py-14">
+        <div className="rounded-[2rem] bg-[#173d39] text-white p-8 lg:p-10 grid lg:grid-cols-[1fr_auto] gap-6 items-center">
+          <div>
+            <h2 className="text-4xl font-black mb-3">Ready to book?</h2>
+            <p className="text-white/75 font-semibold">Start as a new client, check requirements, or contact Park9 directly.</p>
+          </div>
+          <div className="flex gap-3 flex-wrap">
+            <PrimaryButton light onClick={() => setPage("New Clients")}>New Clients</PrimaryButton>
+            <button type="button" onClick={() => setPage("Contact")} className="rounded-full bg-[#f0c95a] text-[#173d39] px-6 py-4 font-black">Contact</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 function OriginalDirection({ setPage }) {
@@ -753,6 +905,7 @@ export default function Park9Website() {
       {active === "playful" && <Playful setPage={navigateToPage} />}
       {active === "urban" && <Urban setPage={navigateToPage} />}
       {active === "original" && <OriginalDirection setPage={navigateToPage} />}
+      {active === "simple" && <SimpleClean setPage={navigateToPage} />}
     </>
   );
 }
