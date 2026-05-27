@@ -453,7 +453,7 @@ function DesignSelector({ setActive, setPage }) {
         </section>
 
         <section className="max-w-7xl mx-auto px-5 pb-20">
-          <div className="grid lg:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {concepts.map((concept) => (
               <button type="button" key={concept.id} onClick={() => choose(concept.id)} className="text-left rounded-[2rem] bg-white border border-black/10 p-6 shadow-sm hover:-translate-y-1 hover:shadow-xl transition">
                 <p className="text-sm uppercase tracking-[.2em] text-[#b8861b] font-black mb-4">{concept.label}</p>
