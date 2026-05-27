@@ -367,7 +367,7 @@ function Logo({ variant = "original", light = false }) {
           <span className={s.par}>par</span>
           <span className={s.k9}>k9</span>
         </div>
-        <div className={`mt-2 h-[5px] w-[34px] ${s.bar} ${s.mark}`} />
+        <div className={`mt-3 h-[5px] w-[44px] translate-x-[46px] ${s.bar} ${s.mark}`} />
         <div className={`mt-3 w-[155px] border-y py-2 text-[7.5px] uppercase tracking-[0.075em] font-medium whitespace-nowrap text-center ${s.tag}`}>
           <span className="font-black">Urban</span> Pet Playcare & Resorts
         </div>
