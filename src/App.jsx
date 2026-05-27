@@ -320,17 +320,58 @@ function LinkedInIcon({ size = 18 }) {
 
 function Logo({ variant = "original", light = false }) {
   const styles = {
-    resort: { wrap: "bg-white/70 border border-[#eadfce] shadow-sm rounded-[1.25rem] px-4 py-3", par: light ? "text-[#f5efd4]" : "text-[#b7ad6b]", k9: light ? "text-[#f0c95a]" : "text-[#8b8d2d]", bar: "bg-[#c49a2c]", tag: light ? "border-white/40 text-white" : "border-[#b8aa82] text-[#4a4a4a]", font: "font-serif", mark: "rounded-full" },
-    playful: { wrap: "bg-white border border-[#f4c84d] shadow-sm rounded-[1.25rem] px-4 py-3", par: "text-[#d89b1f]", k9: "text-[#173d39]", bar: "bg-[#d89b1f]", tag: "border-[#d89b1f] text-[#173d39]", font: "font-serif", mark: "rounded-full" },
-    urban: { wrap: light ? "bg-white/10 border border-white/20 rounded-xl px-4 py-3" : "bg-[#dcefe8] border border-[#bad4ca] rounded-xl px-4 py-3", par: light ? "text-[#dcefe8]" : "text-[#6f9b8d]", k9: light ? "text-[#f0c95a]" : "text-[#183b36]", bar: "bg-[#f0c95a]", tag: light ? "border-white/35 text-white" : "border-[#78968e] text-[#183b36]", font: "font-sans", mark: "rounded-md" },
-    original: { wrap: "px-1 py-1", par: light ? "text-[#eee6c5]" : "text-[#c9c57f]", k9: light ? "text-[#f0c95a]" : "text-[#9f9f34]", bar: "bg-[#9f9f34]", tag: light ? "border-white/40 text-white" : "border-[#4a4a4a] text-[#4a4a4a]", font: "font-serif", mark: "rounded-none" },
+    resort: {
+      wrap: "bg-white/70 border border-[#eadfce] shadow-sm rounded-[1.25rem] px-4 py-3",
+      par: light ? "text-[#f5efd4]" : "text-[#b7ad6b]",
+      k9: light ? "text-[#f0c95a]" : "text-[#8b8d2d]",
+      bar: "bg-[#c49a2c]",
+      tag: light ? "border-white/40 text-white" : "border-[#b8aa82] text-[#4a4a4a]",
+      font: "font-serif",
+      mark: "rounded-full",
+    },
+    playful: {
+      wrap: "bg-white border border-[#f4c84d] shadow-sm rounded-[1.25rem] px-4 py-3",
+      par: "text-[#d89b1f]",
+      k9: "text-[#173d39]",
+      bar: "bg-[#d89b1f]",
+      tag: "border-[#d89b1f] text-[#173d39]",
+      font: "font-serif",
+      mark: "rounded-full",
+    },
+    urban: {
+      wrap: light ? "bg-white/10 border border-white/20 rounded-xl px-4 py-3" : "bg-[#dcefe8] border border-[#bad4ca] rounded-xl px-4 py-3",
+      par: light ? "text-[#dcefe8]" : "text-[#6f9b8d]",
+      k9: light ? "text-[#f0c95a]" : "text-[#183b36]",
+      bar: "bg-[#f0c95a]",
+      tag: light ? "border-white/35 text-white" : "border-[#78968e] text-[#183b36]",
+      font: "font-sans",
+      mark: "rounded-md",
+    },
+    original: {
+      wrap: "px-1 py-1",
+      par: light ? "text-[#eee6c5]" : "text-[#c9c57f]",
+      k9: light ? "text-[#f0c95a]" : "text-[#9f9f34]",
+      bar: "bg-[#9f9f34]",
+      tag: light ? "border-white/40 text-white" : "border-[#4a4a4a] text-[#4a4a4a]",
+      font: "font-serif",
+      mark: "rounded-none",
+    },
   };
+
   const s = styles[variant] || styles.original;
+
   return (
     <div className={`leading-none shrink-0 ${s.wrap}`}>
-      <div className={`${s.font} font-black lowercase tracking-[-0.095em] text-[52px] leading-[0.74] whitespace-nowrap`}><span className={s.par}>par</span><span className={s.k9}>k9</span></div>
-      <div className={`ml-[148px] mt-1 h-[5px] w-[34px] ${s.bar} ${s.mark}`} />
-      <div className={`ml-[35px] mt-3 w-[155px] border-y py-2 text-[7.5px] uppercase tracking-[0.075em] font-medium whitespace-nowrap text-center ${s.tag}`}><span className="font-black">Urban</span> Pet Playcare & Resorts</div>
+      <div className="w-[205px] flex flex-col items-center text-center">
+        <div className={`${s.font} font-black lowercase tracking-[-0.095em] text-[52px] leading-[0.74] whitespace-nowrap text-center`}>
+          <span className={s.par}>par</span>
+          <span className={s.k9}>k9</span>
+        </div>
+        <div className={`mt-2 h-[5px] w-[34px] ${s.bar} ${s.mark}`} />
+        <div className={`mt-3 w-[155px] border-y py-2 text-[7.5px] uppercase tracking-[0.075em] font-medium whitespace-nowrap text-center ${s.tag}`}>
+          <span className="font-black">Urban</span> Pet Playcare & Resorts
+        </div>
+      </div>
     </div>
   );
 }
