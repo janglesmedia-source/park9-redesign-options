@@ -921,7 +921,7 @@ function ColourPop({ setPage }) {
         <div className="rounded-[3rem] bg-gradient-to-br from-[#FFE1EC] via-[#FFF4C7] to-[#D9CCFF] border border-[#F1C6D7] p-8 lg:p-12 shadow-xl grid lg:grid-cols-[1fr_.85fr] gap-10 items-center">
           <div>
             <p className="uppercase tracking-[.22em] text-[#B54D7A] font-black mb-4">Colourful Clean Direction</p>
-            <h1 className="text-6xl lg:text-8xl font-black tracking-[-.07em] leading-[.84] mb-6">Pet care that feels bright, simple, and premium.</h1>
+            <h1 className="text-6xl lg:text-8xl font-black tracking-[-.07em] leading-[.84] mb-6">Pet care that's simple, and premium.</h1>
             <p className="text-xl font-semibold text-[#5D4B73] max-w-2xl mb-8">A lighter Park9 concept with polished pastels, clear service choices, and no clutter.</p>
             <div className="flex gap-3 flex-wrap">
               <button type="button" onClick={() => setPage("New Clients")} className="rounded-full bg-[#B54D7A] text-white px-8 py-5 text-lg font-black shadow-sm">Book Now</button>
