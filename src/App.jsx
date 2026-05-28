@@ -67,6 +67,13 @@ const concepts = [
     description: "A lighter, cleaner option: fewer sections, bigger actions, simple service blocks, visible booking, locations, reviews, and client login.",
     bestFor: "Fast decisions + simple client review",
   },
+  {
+    id: "colourpop",
+    label: "6. Colourful Clean",
+    headline: "Bright, polished, easy to use",
+    description: "A colourful but elevated direction: soft pastel colour blocking, clean service choices, clear booking actions, and very little clutter.",
+    bestFor: "Modern warmth + fastest decisions",
+  },
 ];
 
 const pageData = {
@@ -307,7 +314,7 @@ const testimonials = [
 ];
 
 function runChecks() {
-  console.assert(concepts.length === 5, "Expected five design options.");
+  console.assert(concepts.length === 6, "Expected six design options.");
   console.assert(services.length === 6, "Expected six core services.");
   console.assert(allPageGroups.flatMap((group) => group[1]).length === pages.length, "Every page should appear in the page directory.");
   console.assert(testimonials.length === 9 && testimonials.length % 3 === 0, "Testimonials should rotate in groups of three.");
@@ -431,7 +438,7 @@ function DesignSelector({ setActive, setPage }) {
           <Logo variant="original" />
           <div className="hidden md:flex items-center gap-2 text-sm font-black text-[#516966]">
             <span className="rounded-full bg-[#f0c95a] px-4 py-2">Client Review</span>
-            <span className="rounded-full bg-[#edf5f1] px-4 py-2">5 complete directions</span>
+            <span className="rounded-full bg-[#edf5f1] px-4 py-2">6 complete directions</span>
           </div>
         </div>
       </header>
@@ -440,8 +447,8 @@ function DesignSelector({ setActive, setPage }) {
         <section className="max-w-7xl mx-auto px-5 py-16 lg:py-24 grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
           <div>
             <p className="uppercase tracking-[.28em] text-[#b8861b] font-black mb-5">Park9 redesign concepts</p>
-            <h1 className="text-6xl lg:text-8xl font-black tracking-[-.07em] leading-[.86] mb-7">Choose the direction before choosing the details.</h1>
-            <p className="text-xl text-[#526762] leading-relaxed mb-8">Each option uses the same core services, locations, booking paths, webcams, and client pages, but presents Park9 with a different strategic personality.</p>
+            <h1 className="text-6xl lg:text-8xl font-black tracking-[-.07em] leading-[.86] mb-7">Six ways to make Park9 feel clearer, warmer, and easy to book.</h1>
+            <p className="text-xl text-[#526762] leading-relaxed mb-8">Each design keeps the same Park9 essentials — playcare, boarding, grooming, shuttle, webcams, two locations, new-client onboarding, and returning-client access — but gives the brand a different first impression.</p>
             <div className="grid sm:grid-cols-3 gap-3">
               {["New clients", "Returning clients", "Service shoppers"].map((item) => (
                 <div key={item} className="rounded-2xl bg-white border border-black/10 p-4 shadow-sm">
@@ -462,7 +469,7 @@ function DesignSelector({ setActive, setPage }) {
         </section>
 
         <section className="max-w-7xl mx-auto px-5 pb-20">
-          <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-5">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
             {concepts.map((concept) => (
               <button type="button" key={concept.id} onClick={() => choose(concept.id)} className="text-left rounded-[2rem] bg-white border border-black/10 p-6 shadow-sm hover:-translate-y-1 hover:shadow-xl transition">
                 <p className="text-sm uppercase tracking-[.2em] text-[#b8861b] font-black mb-4">{concept.label}</p>
@@ -582,36 +589,54 @@ function PageView({ page, setPage, activeConcept }) {
   const Icon = page.icon;
   const [openFaq, setOpenFaq] = useState(null);
   const relatedServices = services.filter((item) => item.id !== page.id).slice(0, 5);
+  const isColourPop = activeConcept === "colourpop";
+  const pageBg = isColourPop ? "bg-[#f5f1e8]" : "bg-[#fbf8f1]";
+  const heroShell = isColourPop
+    ? "rounded-[3rem] bg-gradient-to-br from-[#dcefe8] via-[#f5f1e8] to-[#e7ddf3] border border-[#b9cfc7] shadow-xl p-7 lg:p-10"
+    : "";
+  const detailCardClass = isColourPop
+    ? "rounded-[2rem] bg-white p-7 border border-[#d8e2df] shadow-lg"
+    : "rounded-[2rem] bg-[#fbf8f1] p-7 border border-black/10 shadow-sm";
+  const questionPanelClass = isColourPop
+    ? "rounded-[2.5rem] bg-[#244f49] text-white p-8 lg:p-10 border border-[#173d39] shadow-xl"
+    : "rounded-[2.5rem] bg-[#173d39] text-white p-8 lg:p-10";
 
   return (
-    <div className="bg-[#fbf8f1] text-[#173d39] min-h-screen pb-24">
-      <Header setPage={setPage} theme={activeConcept === "urban" ? "dark" : "light"} logoVariant={activeConcept} />
+    <div className={`${pageBg} text-[#173d39] min-h-screen pb-24`}>
+      <Header
+        setPage={setPage}
+        theme={activeConcept === "urban" ? "dark" : "light"}
+        logoVariant={activeConcept === "colourpop" ? "playful" : activeConcept}
+      />
+
       <main>
         <section className="max-w-7xl mx-auto px-5 py-10">
-          <div className="flex flex-wrap items-center gap-3 mb-8">
-            <button type="button" onClick={() => setPage("home")} className="rounded-full bg-white px-5 py-3 font-black border border-black/10 shadow-sm">← Home</button>
-            <span className="rounded-full bg-[#f0c95a] px-5 py-3 font-black border border-black/10">{page.title}</span>
-          </div>
-
-          <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-10 items-center">
-            <div>
-              <p className="uppercase tracking-[.25em] text-[#b8861b] font-black mb-4">{page.eyebrow}</p>
-              <h1 className="text-5xl lg:text-7xl font-black tracking-[-.055em] leading-[.9] mb-6">{page.hero}</h1>
-              <p className="text-xl text-[#526762] leading-relaxed mb-5">{page.summary}</p>
-              <div className="flex flex-wrap gap-3 mt-8">
-                <PrimaryButton onClick={() => setPage("Contact")}>Book now</PrimaryButton>
-                <button type="button" onClick={() => setPage("Requirements")} className="rounded-full bg-white border border-black/10 px-6 py-3 font-black">Requirements</button>
-                <button type="button" onClick={() => setPage("Pricing")} className="rounded-full bg-[#f0c95a] px-6 py-3 font-black">Pricing</button>
-              </div>
+          <div className={heroShell}>
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              <button type="button" onClick={() => setPage("home")} className="rounded-full bg-white px-5 py-3 font-black border border-black/10 shadow-sm">← Home</button>
+              <span className="rounded-full bg-[#f0c95a] px-5 py-3 font-black border border-black/10">{page.title}</span>
             </div>
 
-            <div className="rounded-[2.5rem] bg-white p-5 shadow-xl border border-black/10">
-              <img src={page.photo} alt={page.title} className="h-[420px] w-full object-cover rounded-[2rem] mb-6" />
-              <div className="flex items-center gap-4">
-                <div className="h-14 w-14 rounded-2xl bg-[#f0c95a] flex items-center justify-center"><Icon /></div>
-                <div>
-                  <h2 className="text-2xl font-black">{page.title}</h2>
-                  <p className="text-[#526762] font-semibold">Service details, booking guidance, and care information.</p>
+            <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-10 items-center">
+              <div>
+                <p className="uppercase tracking-[.25em] text-[#b8861b] font-black mb-4">{page.eyebrow}</p>
+                <h1 className="text-5xl lg:text-7xl font-black tracking-[-.055em] leading-[.9] mb-6">{page.hero}</h1>
+                <p className="text-xl text-[#526762] leading-relaxed mb-5">{page.summary}</p>
+                <div className="flex flex-wrap gap-3 mt-8">
+                  <PrimaryButton onClick={() => setPage("Contact")}>Book now</PrimaryButton>
+                  <button type="button" onClick={() => setPage("Requirements")} className="rounded-full bg-white border border-black/10 px-6 py-3 font-black">Requirements</button>
+                  <button type="button" onClick={() => setPage("Pricing")} className="rounded-full bg-[#f0c95a] px-6 py-3 font-black">Pricing</button>
+                </div>
+              </div>
+
+              <div className="rounded-[2.5rem] bg-white p-5 shadow-xl border border-black/10">
+                <img src={page.photo} alt={page.title} className="h-[420px] w-full object-cover rounded-[2rem] mb-6" />
+                <div className="flex items-center gap-4">
+                  <div className="h-14 w-14 rounded-2xl bg-[#f0c95a] flex items-center justify-center"><Icon /></div>
+                  <div>
+                    <h2 className="text-2xl font-black">{page.title}</h2>
+                    <p className="text-[#526762] font-semibold">Service details, booking guidance, and care information.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -626,7 +651,7 @@ function PageView({ page, setPage, activeConcept }) {
             </div>
             <div className="grid lg:grid-cols-3 gap-5">
               {page.sections.map(([heading, items]) => (
-                <div key={heading} className="rounded-[2rem] bg-[#fbf8f1] p-7 border border-black/10 shadow-sm">
+                <div key={heading} className={detailCardClass}>
                   <h3 className="text-2xl font-black mb-5">{heading}</h3>
                   <ul className="space-y-3">
                     {items.map((item) => (
@@ -643,7 +668,7 @@ function PageView({ page, setPage, activeConcept }) {
         </section>
 
         <section className="max-w-7xl mx-auto px-5 py-16 grid lg:grid-cols-[0.85fr_1.15fr] gap-8">
-          <div className="rounded-[2.5rem] bg-[#173d39] text-white p-8 lg:p-10">
+          <div className={questionPanelClass}>
             <h2 className="text-4xl font-black mb-3">Common questions</h2>
             <p className="text-white/70 font-semibold mb-8">Tap a question for a quick answer, or contact Park9 for details specific to your pet.</p>
             <PrimaryButton light onClick={() => setPage("Contact")}>Ask Park9</PrimaryButton>
@@ -878,6 +903,107 @@ function SimpleClean({ setPage }) {
   );
 }
 
+function ColourPop({ setPage }) {
+  const colourServices = [
+    { id: "Dog Playcare", bg: "bg-[#FFE1EC]", text: "text-[#263238]", badge: "bg-[#B54D7A] text-white" },
+    { id: "Dog Boarding", bg: "bg-[#D9CCFF]", text: "text-[#263238]", badge: "bg-[#6F5AA8] text-white" },
+    { id: "Grooming", bg: "bg-[#BDE0FE]", text: "text-[#263238]", badge: "bg-[#3F63B5] text-white" },
+    { id: "Cat Boarding", bg: "bg-[#FFF4C7]", text: "text-[#263238]", badge: "bg-[#D69F22] text-white" },
+    { id: "Pool Rental", bg: "bg-[#CFF7E2]", text: "text-[#263238]", badge: "bg-[#2D8C6A] text-white" },
+    { id: "Shuttle", bg: "bg-[#FFD6A5]", text: "text-[#263238]", badge: "bg-[#E07A5F] text-white" },
+  ];
+
+  return (
+    <div id="top" className="bg-[#FFF7F2] text-[#263238] pb-24 overflow-hidden">
+      <Header setPage={setPage} logoVariant="playful" />
+
+      <section className="max-w-7xl mx-auto px-5 py-12 lg:py-20">
+        <div className="rounded-[3rem] bg-gradient-to-br from-[#FFE1EC] via-[#FFF4C7] to-[#D9CCFF] border border-[#F1C6D7] p-8 lg:p-12 shadow-xl grid lg:grid-cols-[1fr_.85fr] gap-10 items-center">
+          <div>
+            <p className="uppercase tracking-[.22em] text-[#B54D7A] font-black mb-4">Colourful Clean Direction</p>
+            <h1 className="text-6xl lg:text-8xl font-black tracking-[-.07em] leading-[.84] mb-6">Pet care that feels bright, simple, and premium.</h1>
+            <p className="text-xl font-semibold text-[#5D4B73] max-w-2xl mb-8">A lighter Park9 concept with polished pastels, clear service choices, and no clutter.</p>
+            <div className="flex gap-3 flex-wrap">
+              <button type="button" onClick={() => setPage("New Clients")} className="rounded-full bg-[#B54D7A] text-white px-8 py-5 text-lg font-black shadow-sm">Book Now</button>
+              <button type="button" onClick={() => setPage("Client Login")} className="rounded-full bg-white border border-[#F1C6D7] px-8 py-5 text-lg font-black shadow-sm">Client Login</button>
+              <button type="button" onClick={() => setPage("Contact")} className="rounded-full bg-[#3F63B5] text-white px-8 py-5 text-lg font-black shadow-sm">Contact Park9</button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 rotate-1">
+            <img src={animalPhotos.dogRun} alt="Dogs playing" className="rounded-[2rem] h-52 w-full object-cover border-4 border-white shadow-lg" />
+            <img src={animalPhotos.cat} alt="Cat boarding" className="rounded-[2rem] h-52 w-full object-cover border-4 border-white shadow-lg mt-8" />
+            <img src={animalPhotos.torontoSkyline} alt="Toronto skyline" className="rounded-[2rem] h-52 w-full object-cover border-4 border-white shadow-lg -mt-8" />
+            <img src={animalPhotos.pearsonAirport} alt="Pearson airport" className="rounded-[2rem] h-52 w-full object-cover border-4 border-white shadow-lg" />
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="max-w-7xl mx-auto px-5 py-12">
+        <div className="text-center mb-8">
+          <p className="uppercase tracking-[.22em] text-[#B54D7A] font-black mb-3">Start here</p>
+          <h2 className="text-5xl lg:text-6xl font-black tracking-[-.05em]">What does your pet need?</h2>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {colourServices.map((item) => {
+            const service = pageData[item.id];
+            const Icon = service.icon;
+            return (
+              <button type="button" key={item.id} onClick={() => setPage(item.id)} className={`${item.bg} ${item.text} rounded-[2rem] p-7 text-left min-h-[220px] shadow-sm hover:-translate-y-1 hover:shadow-xl transition border border-white/80`}>
+                <div className={`h-16 w-16 rounded-2xl ${item.badge} flex items-center justify-center mb-5 shadow-sm`}>
+                  <Icon size={34} strokeWidth={2.7} />
+                </div>
+                <h3 className="text-3xl font-black mb-3">{service.title}</h3>
+                <p className="font-bold leading-snug opacity-90">{service.summary}</p>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="locations" className="max-w-7xl mx-auto px-5 py-12">
+        <div className="grid lg:grid-cols-2 gap-5">
+          <button type="button" onClick={() => setPage("Downtown Toronto")} className="relative overflow-hidden rounded-[2.5rem] min-h-[340px] text-left border border-white shadow-lg">
+            <img src={animalPhotos.torontoSkyline} alt="Downtown Toronto" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/10" />
+            <div className="relative z-10 h-full p-8 flex flex-col justify-end text-white">
+              <MapPin className="mb-4 text-[#FFE1EC]" />
+              <h3 className="text-4xl font-black mb-2">Downtown Toronto</h3>
+              <p className="font-bold text-white/90">Daycare, grooming, and city convenience.</p>
+            </div>
+          </button>
+
+          <button type="button" onClick={() => setPage("Pearson YYZ")} className="relative overflow-hidden rounded-[2.5rem] min-h-[340px] text-left border border-white shadow-lg">
+            <img src={animalPhotos.pearsonAirport} alt="Pearson YYZ" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/10" />
+            <div className="relative z-10 h-full p-8 flex flex-col justify-end text-white">
+              <Plane className="mb-4 text-[#BDE0FE]" />
+              <h3 className="text-4xl font-black mb-2">Pearson YYZ</h3>
+              <p className="font-bold text-white/90">Boarding, travel days, and longer stays.</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section id="all-pages" className="max-w-7xl mx-auto px-5 py-12">
+        <div className="rounded-[2.5rem] bg-white p-8 border border-[#F1C6D7] shadow-xl">
+          <h2 className="text-4xl font-black mb-6">Quick links</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {["Dog Playcare", "Dog Boarding", "Cat Boarding", "Grooming", "Pool Rental", "Shuttle", "Webcams", "Pricing", "Requirements", "Contact", "New Clients", "Client Login"].map((item) => (
+              <button key={item} type="button" onClick={() => setPage(item)} className="rounded-full bg-[#FFF7F2] hover:bg-[#FFE1EC] border border-[#F1C6D7] px-4 py-3 font-black transition">{item}</button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" className="max-w-7xl mx-auto px-5 py-12">
+        <h2 className="text-5xl font-black mb-8 text-center">Happy pets. Happy people.</h2>
+        <Testimonials />
+      </section>
+    </div>
+  );
+}
+
 function OriginalDirection({ setPage }) {
   return <div id="top" className="bg-[#fbf8f1] text-[#173d39] pb-24"><Header setPage={setPage} logoVariant="original" /><section className="relative overflow-hidden"><div className="absolute -top-28 -right-28 h-96 w-96 rounded-full bg-[#f0c95a]/30 blur-3xl" /><div className="absolute top-48 -left-24 h-72 w-72 rounded-full bg-[#8fc9bd]/30 blur-3xl" /><div className="max-w-7xl mx-auto px-5 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center"><div><div className="inline-flex items-center gap-2 rounded-full bg-white border border-[#eadfce] px-4 py-2 text-sm font-bold text-[#3d5b57] shadow-sm mb-6"><ShieldCheck size={18} /> Toronto pet care with real transparency</div><h1 className="text-5xl lg:text-7xl font-black tracking-[-0.05em] leading-[0.92] mb-7">More than daycare. <span className="text-[#f0b93a]">A better stay</span> for your pet.</h1><p className="text-xl text-[#526762] leading-relaxed max-w-xl mb-8">Park9 is Toronto’s pet playcare, boarding, grooming, shuttle, and pool destination, with dedicated care for dogs and cats, live webcams, caring staff, and two GTA locations.</p><div className="flex flex-wrap gap-4"><PrimaryButton onClick={() => setPage("New Clients")}>Book a Meet & Greet</PrimaryButton><button type="button" onClick={() => setPage("Client Login")} className="inline-flex bg-white text-[#173d39] border border-[#d8e2df] rounded-full px-7 py-4 font-black">Client Login</button></div></div><div className="rounded-[2.5rem] bg-[#173d39] p-5 shadow-2xl rotate-1"><div className="rounded-[2rem] bg-gradient-to-br from-[#f0c95a] via-[#f7d99a] to-[#8fc9bd] min-h-[520px] p-8 flex flex-col justify-between overflow-hidden relative"><PawPrint className="absolute right-8 top-8 h-28 w-28 text-white/25 rotate-12" /><div className="relative z-10 rounded-3xl bg-white/85 p-5 shadow-sm max-w-xs"><b>Built for pet parents</b><p className="text-sm text-[#526762] font-semibold">Live webcams, thoughtful onboarding, and clear service paths.</p></div><div className="relative z-10"><div className="text-[8rem] leading-none font-black text-white/70 tracking-[-0.1em]">K9</div><div className="rounded-3xl bg-white p-6 shadow-lg max-w-md ml-auto"><h3 className="text-2xl font-black mb-2">Happy pets. Calm humans.</h3><p className="text-[#526762] font-semibold">Warm, clean, premium, and friendly pet care.</p></div></div></div></div></div></section><section id="services" className="py-20 bg-white"><div className="max-w-7xl mx-auto px-5"><h2 className="text-5xl font-black mb-8">Everything dogs and cats need.</h2><ServiceGrid setPage={setPage} /></div></section><PageHub setPage={setPage} /><StandardSections variant="original" setPage={setPage} /></div>;
 }
@@ -906,6 +1032,7 @@ export default function Park9Website() {
       {active === "urban" && <Urban setPage={navigateToPage} />}
       {active === "original" && <OriginalDirection setPage={navigateToPage} />}
       {active === "simple" && <SimpleClean setPage={navigateToPage} />}
+      {active === "colourpop" && <ColourPop setPage={navigateToPage} />}
     </>
   );
 }
